@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Root app container */
+.app {
+  display: flex;
+  align-items: flex-start;      /* or center if you want vertical centering */
+  justify-content: center;      /* centers overlay horizontally */
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background-size: cover;
+  background-position: center;
+
+}
+/* Content width */
+*/
+.overlay {
+  width: 100%;
+  max-width: 1200px;            /* controls max content width */
+  margin: 0 auto;               /* centers when smaller than screen */
+}
+
+/* ---------- HEADER ---------- */
+
+.header {
+  text-align: center;
+  color: #013220;
+  text-shadow: 0 2px 6px rgba(16, 197, 207, 0.8);
+  margin-bottom: 2.2rem;
+}
+
+.header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.03em;
+}
+
+.streak {
+  margin: 0;
+  opacity: 0.95;
+  font-size: 1.05rem;
+}
+
+/* ---------- LAYOUT GRID ---------- */
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid > *:nth-child(3) {
+    grid-column: 1 / -1;   /* todo list spans full width */
+  }
+}
+
+
+/* ---------- CARDS ---------- */
+
+.card {
+  /*background: rgba(255, 255, 255, 0.25);*/
+  background: linear-gradient(
+  to bottom right,
+  rgba(255, 255, 255, 0.45),
+  rgba(255, 255, 255, 0.25)
+);
+  font-style: italic;
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  padding: 1.4rem 1.6rem;
+/*  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);*/
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #080505;
+}
+
+.card h2 {
+  margin: 0 0 0.9rem 0;
+  font-size: 1.2rem;
+  color: #0A3D62;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ---------- QUOTE & TIP TEXT ---------- */
+
+blockquote {
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+  color: #0c1016;
+}
+
+cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  color: #030509;
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ---------- TODO INPUT ---------- */
+
+.todo-input {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.todo-input input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.9rem;
+  font-size: 0.98rem;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  /*background-color: rgba(255,255,255,0.6);
+  color: #f9fafb;*/
+   background: rgba(255, 255, 255, 0.55);
+color: #013220;
+}
+
+.todo-input input::placeholder {
+  color: #474c56c1;
+}
+
+.todo-input input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+  background-color: #10878d;
+   background: rgba(255, 255, 255, 0.55);
+color: #013220;
+ 
+}
+
+.todo-input button {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 0.9rem;
+  /*background: #1B8A5A;*/
+  background-color: #1b8a5a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+
+.todo-input button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 20px #136F47;
+
+  
+}
+
+/* ---------- TODO LIST ---------- */
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.6rem;
+  border-radius: 0.7rem;
+  margin-bottom: 0.4rem;
+  transition: background 0.2s, transform 0.1s;
+  color: #05052f;
+}
+
+.todo-list li:hover {
+ /* background: #eef2ff;*/
+  background: rgba(255, 255, 255, 0.55);
+color: #013220;
+  transform: translateY(-1px);
+}
+
+.todo-list label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.todo-list input[type='checkbox'] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: #22c55e;
+}
+
+/* Delete button */
+.todo-list button {
+  border: none;
+  background: #fee2e2;
+  color: #b91c1c;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.todo-list button:hover {
+  background: #fecaca;
+  transform: scale(1.05);
+}
